@@ -21,6 +21,7 @@ class Ban(commands.Cog):
             await member.send(
                 embed=discord.Embed(
                     title="あなたは neko's Global Ban Bot により**グローバルBAN**されています。",
+                    description="-# 異議申し立ては https://discord.gg/rQZ3g6aCqW までどうぞ。",
                     colour=discord.Colour.red(),
                 ).add_field(name="理由", value=row["reason"]),
                 ephemeral=True,
@@ -48,6 +49,7 @@ class Ban(commands.Cog):
                 await member.send(
                     embed=discord.Embed(
                         title="あなたは neko's Global Ban Bot により**グローバルBAN**されています。",
+                        description="-# 異議申し立ては https://discord.gg/rQZ3g6aCqW までどうぞ。",
                         colour=discord.Colour.red(),
                     ).add_field(name="理由", value=row["reason"]),
                 )

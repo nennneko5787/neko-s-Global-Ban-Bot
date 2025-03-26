@@ -1,3 +1,5 @@
+import traceback
+
 import discord
 from discord.ext import commands
 
@@ -33,6 +35,19 @@ class PunishModal(discord.ui.Modal, title="処罰"):
 class PunishCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
+
+    @commands.command
+    async def pardon(self, ctx: commands.Context, userId: int):
+        try:
+            await DatabaseService.pool.execute(
+                """
+                    DELETE FROM punishes WHERE id = $1
+                """,
+                userId,
+            )
+            await ctx.reply("OK, pardoned")
+        except:
+            await ctx.reply(f"```py\n{traceback.format_exc()}```\n")
 
     async def punish(self, interaction: discord.Interaction, customFields: list[str]):
         await interaction.response.send_modal(
