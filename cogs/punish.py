@@ -51,7 +51,7 @@ class PunishCog(commands.Cog):
 
     async def punish(self, interaction: discord.Interaction, customFields: list[str]):
         await interaction.response.send_modal(
-            PunishModal(self.bot.get_user(int(customFields[1])))
+            PunishModal(await self.bot.fetch_user(int(customFields[1])))
         )
 
     @commands.Cog.listener()
