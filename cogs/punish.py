@@ -49,6 +49,20 @@ class PunishCog(commands.Cog):
         except:
             await ctx.reply(f"```py\n{traceback.format_exc()}```\n")
 
+    @commands.command
+    async def punish(self, ctx: commands.Context, user: discord.User, reason: str):
+        try:
+            await DatabaseService.pool.execute(
+                """
+                    INSERT INTO punishes (id, reason) VALUES ($1, $2)
+                """,
+                user.id,
+                reason,
+            )
+            await ctx.reply("OK, punished")
+        except:
+            await ctx.reply(f"```py\n{traceback.format_exc()}```\n")
+
     async def punish(self, interaction: discord.Interaction, customFields: list[str]):
         await interaction.response.send_modal(
             PunishModal(await self.bot.fetch_user(int(customFields[1])))

@@ -29,6 +29,7 @@ async def setup_hook():
     await bot.load_extension("cogs.report")
     await bot.load_extension("cogs.punish")
     await bot.load_extension("cogs.ban")
+    await bot.load_extension("cogs.presence")
     await bot.tree.sync()
 
 
