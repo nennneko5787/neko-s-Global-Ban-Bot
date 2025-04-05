@@ -5,6 +5,9 @@ from discord.ext import commands, tasks
 class PresenceCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
+
+    @commands.Cog.listener()
+    async def on_ready(self):
         self.presenceLoop.start()
 
     @tasks.loop(seconds=20)
